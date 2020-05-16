@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
     var res = await http.get(statUrl);
     if(res.statusCode == 200){
       final data = jsonDecode(res.body);
-      return dataIndia.fromJson(data["data"]["summary"]);
+      return dataIndia.fromJson(data["data"]["unofficial-summary"][0]);
     }
     else throw Exception('kuch toh gadbad hai babu bhaiya!');
   }
@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
       throw Exception('cannot launch');
     }
   }
-
+//
 //  @override
 //  void initState() {
 //    getStats();
@@ -290,7 +290,7 @@ class _MainPageState extends State<MainPage> {
                               children: <Widget>[
                                 SpinKitPulse(color: Colors.green, size: 30),
                                 Text(
-                                  '${covid.discharged}',
+                                  '${covid.recovered}',
                                   style: TextStyle(
                                     color: Colors.green,
                                     fontSize: 25,
@@ -374,31 +374,29 @@ class _MainPageState extends State<MainPage> {
 }
 
 class dataIndia{
-  int confirmedCasesIndian;
-  int confirmedCasesForeign;
-  int discharged;
+  int active;
+  int recovered;
   int deaths;
   int total;
-  int confirmedButLocationUnidentified;
+  String source;
 
-  dataIndia( this.confirmedCasesIndian, this.discharged, this.confirmedButLocationUnidentified ,this.total, this.deaths, this.confirmedCasesForeign );
+  dataIndia( this.active, this.recovered,this.total, this.deaths, this.source);
 
   dataIndia.fromJson(Map<String, dynamic> json)
-      : confirmedCasesIndian = json['confirmedCasesIndian'],
-        confirmedCasesForeign = json['confirmedCasesForeign'],
-        discharged = json['discharged'],
-        deaths = json['deaths'],
+      :
+        source = json['source'],
         total = json['total'],
-        confirmedButLocationUnidentified = json['confirmedButLocationUnidentified'];
+        recovered = json['recovered'],
+        deaths = json['deaths'],
+        active = json['active'];
 
   Map<String, dynamic> toJson() =>
       {
-        'confirmedCasesIndian': confirmedCasesIndian,
-        'confirmedButLocationUnidentified': confirmedButLocationUnidentified,
-        'confirmedCasesForeign': confirmedCasesForeign,
+        'source':source,
         'total': total,
+        'recovered': recovered,
         'deaths': deaths,
-        'discharged': discharged,
+        'active': active,
       };
 
 }
