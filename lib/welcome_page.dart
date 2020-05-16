@@ -11,16 +11,16 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [Colors.teal.shade300, Colors.teal.shade800],
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.teal.shade300, Colors.teal.shade800],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft
           ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
